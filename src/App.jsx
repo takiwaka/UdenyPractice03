@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 import { Input } from "./components/Input";
+import { Incomplete } from "./components/Incomplete";
 
 export const App = () => {
   //入力時のテキストを定義
@@ -63,20 +64,11 @@ export const App = () => {
         onClick={onClickAdd}
       />
 
-      <div className="incomplete-box">
-        <h2 className="title">未完了のTODO</h2>
-        <ul>
-          {incompleteTodo.map((todo, index) => {
-            return (
-              <li key={todo} className="list-row">
-                <p>{todo}</p>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                <button onClick={() => onClickRemove(index)}>削除</button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <Incomplete
+        todo={incompleteTodo}
+        onClickComplete={onClickComplete}
+        onClickRemove={onClickRemove}
+      />
 
       <div className="complete-box">
         <h2 className="title">完了したTODO</h2>
