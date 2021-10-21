@@ -28,6 +28,38 @@ export const App = () => {
     setIncompleteTodo(newTodos);
   };
 
+  const onClickComplete = (index) => {
+    const newIncompleteTodos = [...incompleteTodo];
+    newIncompleteTodos.splice(index, 1);
+
+    const newCompleteTodos = [
+      ...completeTodo,
+      incompleteTodo[index]
+    ];
+
+    setIncompleteTodo(newIncompleteTodos);
+    setCompleteTodo(newCompleteTodos);
+  };
+
+  const onClickReturn = (index) => {
+    const newCompleteTodos = [...completeTodo];
+    newCompleteTodos.splice(index, 1);
+
+    const newIncompleteTodos = [
+      ...incompleteTodo,
+      completeTodo[index]
+    ];
+
+    setCompleteTodo(newCompleteTodos);
+    setIncompleteTodo(newIncompleteTodos);
+  };
+
+  const onClickDelete = (index) => {
+    const newTodos = [...completeTodo];
+    newTodos.splice(index, 1);
+    setCompleteTodo(newTodos);
+  };
+
   return (
     <>
       <div className="input-box">
@@ -46,7 +78,11 @@ export const App = () => {
             return (
               <li key={todo} className="list-row">
                 <p>{todo}</p>
-                <button onClick={null}>完了</button>
+                <button
+                  onClick={() => onClickComplete(index)}
+                >
+                  完了
+                </button>
                 <button
                   onClick={() => onClickRemove(index)}
                 >
@@ -61,12 +97,20 @@ export const App = () => {
       <div className="complete-box">
         <h2 className="title">完了したTODO</h2>
         <ul>
-          {completeTodo.map((todo) => {
+          {completeTodo.map((todo, index) => {
             return (
               <li key="todo" className="list-row">
                 <p>{todo}</p>
-                <button>戻す</button>
-                <button>削除</button>
+                <button
+                  onClick={() => onClickReturn(index)}
+                >
+                  戻す
+                </button>
+                <button
+                  onClick={() => onClickDelete(index)}
+                >
+                  削除
+                </button>
               </li>
             );
           })}
