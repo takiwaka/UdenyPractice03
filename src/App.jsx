@@ -3,7 +3,10 @@ import "./styles.css";
 
 export const App = () => {
   const [todoText, setTodoText] = useState("");
-  const [incompleteTodo, setIncompleteTodo] = useState([]);
+  const [incompleteTodo, setIncompleteTodo] = useState([
+    "ああああ",
+    "いいいい"
+  ]);
   const [completeTodo, setCompleteTodo] = useState([
     "ccccc",
     "dddddd"
@@ -17,6 +20,12 @@ export const App = () => {
     const newTodos = [...incompleteTodo, todoText];
     setIncompleteTodo(newTodos);
     setTodoText("");
+  };
+
+  const onClickRemove = (index) => {
+    const newTodos = [...incompleteTodo];
+    newTodos.splice(index, 1);
+    setIncompleteTodo(newTodos);
   };
 
   return (
@@ -33,12 +42,16 @@ export const App = () => {
       <div className="incomplete-box">
         <h2 className="title">未完了のTODO</h2>
         <ul>
-          {incompleteTodo.map((todo) => {
+          {incompleteTodo.map((todo, index) => {
             return (
               <li key={todo} className="list-row">
                 <p>{todo}</p>
                 <button onClick={null}>完了</button>
-                <button>削除</button>
+                <button
+                  onClick={() => onClickRemove(index)}
+                >
+                  削除
+                </button>
               </li>
             );
           })}
