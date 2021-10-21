@@ -1,21 +1,17 @@
 import { useState } from "react";
 import "./styles.css";
+import { Input } from "./components/Input";
 
 export const App = () => {
   //入力時のテキストを定義
   const [todoText, setTodoText] = useState("");
   //未完了TODOの定義。追加しやすいようにstate化
-  const [incompleteTodo, setIncompleteTodo] = useState([
-    "サンプル"
-  ]);
+  const [incompleteTodo, setIncompleteTodo] = useState(["サンプル"]);
   //完了TODOの定義（同上）
-  const [completeTodo, setCompleteTodo] = useState([
-    "サンプル"
-  ]);
+  const [completeTodo, setCompleteTodo] = useState(["サンプル"]);
 
   //インプットの内容取得　event.target.valueはよく使う
-  const onChangeTodoText = (event) =>
-    setTodoText(event.target.value);
+  const onChangeTodoText = (event) => setTodoText(event.target.value);
 
   //追加ボタンクリック時の関数。
   const onClickAdd = () => {
@@ -37,10 +33,7 @@ export const App = () => {
     const newIncompleteTodos = [...incompleteTodo];
     newIncompleteTodos.splice(index, 1);
 
-    const newCompleteTodos = [
-      ...completeTodo,
-      incompleteTodo[index]
-    ];
+    const newCompleteTodos = [...completeTodo, incompleteTodo[index]];
 
     setIncompleteTodo(newIncompleteTodos);
     setCompleteTodo(newCompleteTodos);
@@ -50,10 +43,7 @@ export const App = () => {
     const newCompleteTodos = [...completeTodo];
     newCompleteTodos.splice(index, 1);
 
-    const newIncompleteTodos = [
-      ...incompleteTodo,
-      completeTodo[index]
-    ];
+    const newIncompleteTodos = [...incompleteTodo, completeTodo[index]];
 
     setCompleteTodo(newCompleteTodos);
     setIncompleteTodo(newIncompleteTodos);
@@ -67,14 +57,11 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-box">
-        <input
-          placeholder="TODO入力"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      <Input
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
 
       <div className="incomplete-box">
         <h2 className="title">未完了のTODO</h2>
@@ -83,16 +70,8 @@ export const App = () => {
             return (
               <li key={todo} className="list-row">
                 <p>{todo}</p>
-                <button
-                  onClick={() => onClickComplete(index)}
-                >
-                  完了
-                </button>
-                <button
-                  onClick={() => onClickRemove(index)}
-                >
-                  削除
-                </button>
+                <button onClick={() => onClickComplete(index)}>完了</button>
+                <button onClick={() => onClickRemove(index)}>削除</button>
               </li>
             );
           })}
@@ -106,16 +85,8 @@ export const App = () => {
             return (
               <li key="todo" className="list-row">
                 <p>{todo}</p>
-                <button
-                  onClick={() => onClickReturn(index)}
-                >
-                  戻す
-                </button>
-                <button
-                  onClick={() => onClickDelete(index)}
-                >
-                  削除
-                </button>
+                <button onClick={() => onClickReturn(index)}>戻す</button>
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </li>
             );
           })}
