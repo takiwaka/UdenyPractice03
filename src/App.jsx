@@ -2,22 +2,27 @@ import { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
+  //入力時のテキストを定義
   const [todoText, setTodoText] = useState("");
+  //未完了TODOの定義。追加しやすいようにstate化
   const [incompleteTodo, setIncompleteTodo] = useState([
-    "ああああ",
-    "いいいい"
+    "サンプル"
   ]);
+  //完了TODOの定義（同上）
   const [completeTodo, setCompleteTodo] = useState([
-    "ccccc",
-    "dddddd"
+    "サンプル"
   ]);
 
+  //インプットの内容取得　event.target.valueはよく使う
   const onChangeTodoText = (event) =>
     setTodoText(event.target.value);
 
+  //追加ボタンクリック時の関数。
   const onClickAdd = () => {
     if (todoText === "") return;
+    //未完了のTODOを一度取得、取得したインプットを追加
     const newTodos = [...incompleteTodo, todoText];
+    //setStateで未完了TODOを再出力
     setIncompleteTodo(newTodos);
     setTodoText("");
   };
