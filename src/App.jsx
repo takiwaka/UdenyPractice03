@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./styles.css";
 import { Input } from "./components/Input";
 import { Incomplete } from "./components/Incomplete";
+import { Complete } from "./components/Complete";
 
 export const App = () => {
   //入力時のテキストを定義
@@ -69,21 +70,11 @@ export const App = () => {
         onClickComplete={onClickComplete}
         onClickRemove={onClickRemove}
       />
-
-      <div className="complete-box">
-        <h2 className="title">完了したTODO</h2>
-        <ul>
-          {completeTodo.map((todo, index) => {
-            return (
-              <li key="todo" className="list-row">
-                <p>{todo}</p>
-                <button onClick={() => onClickReturn(index)}>戻す</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <Complete
+        todo={completeTodo}
+        onClickReturn={onClickReturn}
+        onClickDelete={onClickDelete}
+      />
     </>
   );
 };
