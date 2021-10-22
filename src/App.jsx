@@ -8,12 +8,17 @@ export const App = () => {
   //入力時のテキストを定義
   const [todoText, setTodoText] = useState("");
   //未完了TODOの定義。追加しやすいようにstate化
-  const [incompleteTodo, setIncompleteTodo] = useState(["サンプル"]);
+  const [incompleteTodo, setIncompleteTodo] = useState([
+    "サンプル1"
+  ]);
   //完了TODOの定義（同上）
-  const [completeTodo, setCompleteTodo] = useState(["サンプル"]);
+  const [completeTodo, setCompleteTodo] = useState([
+    "サンプ2"
+  ]);
 
   //インプットの内容取得　event.target.valueはよく使う
-  const onChangeTodoText = (event) => setTodoText(event.target.value);
+  const onChangeTodoText = (event) =>
+    setTodoText(event.target.value);
 
   //追加ボタンクリック時の関数。
   const onClickAdd = () => {
@@ -25,8 +30,8 @@ export const App = () => {
     setTodoText("");
   };
 
-  const onClickRemove = (index) => {
-    const newTodos = [...incompleteTodo];
+  const onClickRemove = (index, todo) => {
+    const newTodos = [...todo];
     newTodos.splice(index, 1);
     setIncompleteTodo(newTodos);
   };
@@ -35,7 +40,10 @@ export const App = () => {
     const newIncompleteTodos = [...incompleteTodo];
     newIncompleteTodos.splice(index, 1);
 
-    const newCompleteTodos = [...completeTodo, incompleteTodo[index]];
+    const newCompleteTodos = [
+      ...completeTodo,
+      incompleteTodo[index]
+    ];
 
     setIncompleteTodo(newIncompleteTodos);
     setCompleteTodo(newCompleteTodos);
@@ -45,7 +53,10 @@ export const App = () => {
     const newCompleteTodos = [...completeTodo];
     newCompleteTodos.splice(index, 1);
 
-    const newIncompleteTodos = [...incompleteTodo, completeTodo[index]];
+    const newIncompleteTodos = [
+      ...incompleteTodo,
+      completeTodo[index]
+    ];
 
     setCompleteTodo(newCompleteTodos);
     setIncompleteTodo(newIncompleteTodos);
@@ -66,12 +77,12 @@ export const App = () => {
       />
 
       <Incomplete
-        todo={incompleteTodo}
+        todos={incompleteTodo}
         onClickComplete={onClickComplete}
         onClickRemove={onClickRemove}
       />
       <Complete
-        todo={completeTodo}
+        todos={completeTodo}
         onClickReturn={onClickReturn}
         onClickDelete={onClickDelete}
       />
