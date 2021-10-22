@@ -14,7 +14,9 @@ export const Complete = (props) => {
               <button onClick={() => onClickReturn(index)}>
                 戻す
               </button>
-              <button onClick={() => onClickDelete(index)}>
+              <button
+                onClick={() => onClickDelete(index, todos)}
+              >
                 削除
               </button>
             </li>

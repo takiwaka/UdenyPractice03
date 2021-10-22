@@ -30,8 +30,8 @@ export const App = () => {
     setTodoText("");
   };
 
-  const onClickRemove = (index, todo) => {
-    const newTodos = [...todo];
+  const onClickRemove = (index, todos) => {
+    const newTodos = [...todos];
     newTodos.splice(index, 1);
     setIncompleteTodo(newTodos);
   };
@@ -62,8 +62,8 @@ export const App = () => {
     setIncompleteTodo(newIncompleteTodos);
   };
 
-  const onClickDelete = (index) => {
-    const newTodos = [...completeTodo];
+  const onClickDelete = (index, todos) => {
+    const newTodos = [...todos];
     newTodos.splice(index, 1);
     setCompleteTodo(newTodos);
   };
